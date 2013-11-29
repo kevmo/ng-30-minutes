@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html  ng-app="Kevmo" ng-controller="MainController">
+
+<head>
+  <title>{{inputVal}}</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="maincontroller.js"></script>
+</head>
+
+<body>
+  <div id="content">
+
+    <h3>{{understand}}: ng-model</h3>
+
+    <input type="text" ng-model="inputVal" />
+    {{inputVal}}
+
+    <h3> Now Play With Data Binding using Directives and Expressions </h3>
+
+    <select ng-model="selectedPerson" ng-options="obj.name for obj in people"></select>
+
+    <select ng-model="selectedGenre">
+      <option ng-repeat='label in people[selectedPerson.id].music'>{{label}}</option>
+    </select>
+
+    <h3> How about filters? </h3>
+
+    <input type="text" ng-model="searchText" />
+    <ul>
+      <li ng-repeat='person in people | filter:searchText'>#{{person.id}} {{person.name}}
+    </ul>
+
+    <h3> Hiding and showing elements with Directives and Booleans (and a filter for fun)</h3>
+
+      <input type="text" ng-model="newSearch" />
+      <ul> Alive
+        <li ng-repeat='person in people | filter:newSearch' ng-show='person.live == true'>#{{person.id}} {{person.name}}
+      </ul>
+      <ul> Dead
+        <li ng-repeat='person in people | filter:newSearch' ng-hide='person.live == true'>#{{person.id}} {{person.name}}
+      </ul>
+
+    <h3> Finally... event listening and handlers in AngularJS: ng-click</h3>
+
+    <input type="text" ng-model="omgSearch" />
+
+    <button ng-click="addNew()">Add new person </button>
+
+  </div>
+
+</body>
+
+</html>
